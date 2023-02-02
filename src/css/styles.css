@@ -14,48 +14,13 @@ body {
   background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
 }
 
-#search-box {
+.search-form {
   font: inherit;
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
 }
 
-p,
-h2 {
-  margin: 0px;
-}
-
-ul {
-  list-style: none;
-}
-
-.country-list__item {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.country-list__item-flag {
-  width: 35px;
-  margin-right: 10px;
-}
-
-.country-info__flag {
-  width: 100px;
-  margin-right: 15px;
-}
-
-.country-info__heading {
-  display: flex;
-  align-items: center;
-  font-size: 26px;
-  margin-bottom: 15px;
-}
-
-.country-info__label {
-  font-weight: 700;
-  margin-right: 5px;
-}
-.country-info__item {
-  margin-bottom: 10px;
+.is-hidden{
+  display: none;
 }
