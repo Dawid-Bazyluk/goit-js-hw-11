@@ -10,8 +10,8 @@ body {
   height: 100vh;
   color: #212121;
   line-height: 1.5;
-  background-color: #ffdee9;
-  background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+  background-color: #fffffffd;
+  
 }
 
 .search-form {
@@ -24,3 +24,32 @@ body {
 .is-hidden{
   display: none;
 }
+
+.gallery{
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;}
+
+  .photo-card{
+  margin-bottom: 40px;
+  width: 400px;
+  -webkit-box-shadow: 3px 7px 14px -9px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 7px 14px -9px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 7px 14px -9px rgba(0, 0, 0, 0.75);}
+
+  .photo-card img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  border-radius: 5px;  
+}
+.info{
+  display: flex;
+  padding: 10px 20px;
+  font-size: 16px;
+  justify-content: space-between;
+}
+.info-item{
+  text-align: center;}
