@@ -12,14 +12,23 @@ const APIKEY = '3738917-e2fd90131b33d81f7486a9a18';
 
 let page = 1;
 let lightbox;
+let limit = 40;
 
 async function getPhotos() {
   const searchedVal = searchForm.value;
   try {
-    const response = await axios.get(
-      `https://pixabay.com/api/?key=${APIKEY}&q=${searchedVal}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${page}`
-    );
-    
+    const response = await axios.get('https://pixabay.com/api/?${params}', {
+      params: {
+        key: APIKEY,
+        q: searchedVal,
+        per_page: limit,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        safesearch: 'true',
+        page: page,
+      },
+    });
+
     return [response.data.hits, response.data.totalHits];
   } catch (error) {
     console.error(error);
@@ -51,8 +60,12 @@ function renderPhotos(photos) {
     </div>`
     )
     .join('');
-  gallery.insertAdjacentHTML('beforeend', markup);
+    gallery.insertAdjacentHTML('beforeend', markup);
+    lightbox = new SimpleLightbox('.gallery a');
 }
+
+submitBtn.addEventListener('click', Submit);
+btnMore.addEventListener('click', loadMore);
 
 async function Submit(event) {
   event.preventDefault();
@@ -66,7 +79,7 @@ async function Submit(event) {
       btnMore.classList.remove('is-hidden');
       page += 1;
       Notiflix.Notify.success(`Hooray! We found ${photos[1]} images.`);
-      lightbox = new SimpleLightbox('.gallery a');
+      
       console.log(photos[0]);
     } else {
       Notiflix.Notify.failure(
@@ -78,4 +91,30 @@ async function Submit(event) {
   }
 }
 
-submitBtn.addEventListener('click', Submit);
+async function loadMore() {
+  try {
+    const photos = await getPhotos();
+    if (photos[0].length > 0) {
+      renderPhotos(photos[0]);
+      
+      const { height: cardHeight } = document
+        .querySelector('.gallery')
+        .firstElementChild.getBoundingClientRect();
+
+      window.scrollBy({
+        top: cardHeight * 2,
+        behavior: 'smooth',
+      });
+      
+      page += 1;
+    }
+    if (photos[0].length < 40) {
+      btnMore.classList.add('is-hidden');
+      Notiflix.Notify.failure(
+        `We're sorry, but you've reached the end of search results.`
+      );
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
