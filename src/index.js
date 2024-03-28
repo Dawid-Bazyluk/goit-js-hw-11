@@ -13,6 +13,7 @@ const APIKEY = '3738917-e2fd90131b33d81f7486a9a18';
 let page = 1;
 let lightbox;
 let limit = 40;
+let test
 
 async function getPhotos() {
   const searchedVal = searchForm.value;
